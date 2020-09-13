@@ -5,6 +5,13 @@ class Transaction {
     }
 }
 
+class MonthlyReport {
+    constructor(name, transactionAmountSums) {
+        this.name = name;
+        this.transactionAmountSums = transactionAmountSums;
+    }
+}
+
 function TransactionBuilder() {
     function addDays(date, days) {
         const copy = new Date(Number(date));
@@ -22,20 +29,22 @@ function TransactionBuilder() {
     }
 }
 
-let transactionBuilder = TransactionBuilder();
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 let transactions = [];
+let monthlyReports = []
+let transactionBuilder = TransactionBuilder();
 
 for (let i = 0; i < 365; i++) {
     transactions.push(transactionBuilder());
 }
 
-let monthlyTransactionAmountSums = []
-
-for (let i = 0; i < 12; i++) {
-    let monthlyTransactions = transactions.filter( transaction => transaction.date.getMonth() == i );
-    let totalMonthlyAmountSum = monthlyTransactions.reduce((accumulator, transaction) => accumulator + transaction.amount, 0).toFixed(2);
-    monthlyTransactionAmountSums.push(totalMonthlyAmountSum);
+for (let month = 0; month < 12; month++) {
+    let monthlyTransactions = transactions.filter(transaction => transaction.date.getMonth() == month);
+    let totalMonthlyAmountSum = monthlyTransactions.reduce((amountSum, transaction) => amountSum + transaction.amount, 0).toFixed(2);
+    monthlyReports.push(new MonthlyReport(monthNames[month], totalMonthlyAmountSum));
 }
 
-console.log(monthlyTransactionAmountSums);
+console.log(monthlyReports);

@@ -7,20 +7,17 @@ class Transaction {
 }
 
 class MonthlyReport {
-    constructor(name, transactionAmountSums) {
-        this.name = name;
-        this.transactionAmountSums = transactionAmountSums;
+    constructor(month, transactionAmountSum, transactionReasonPercentages) {
+        this.month = month;
+        this.transactionAmountSum = transactionAmountSum;
+        this.transactionReasonPercentages = transactionReasonPercentages;
     }
 }
 
 class Reason {
-    constructor(reason, count = 0) {
+    constructor(reason, percentage) {
         this.reason = reason;
-        this.count = count;
-    }
-
-    increment() {
-        count += 1;
+        this.percentage = percentage;
     }
 }
 
@@ -56,13 +53,26 @@ for (let i = 0; i < 365; i++) {
 
 for (let month = 0; month < 12; month++) {
     let monthlyTransactions = transactions.filter(transaction => transaction.date.getMonth() == month);
+    let length = monthlyTransactions.length;
+    let reasonCounts = new Map();
+    let reasonPercentages = [];
+    
+    for (let i = 0; i < length; i++) {
+        let reason = monthlyTransactions[i].reason;
 
-    for (let i = 0; i < monthlyTransactions.length; i++) {
-        console.log(monthlyTransactions[i].reason);
+        if (reasonCounts.has(reason)) {
+            reasonCounts.set(reason, reasonCounts.get(reason) + 1);
+        } else {
+            reasonCounts.set(reason, 1);
+        }
     }
 
+    reasonCounts.forEach( (count, reason) => {
+        reasonPercentages.push(new Reason(reason, (count / length).toFixed(2)));
+    });
+
     let totalMonthlyAmountSum = monthlyTransactions.reduce((amountSum, transaction) => amountSum + transaction.amount, 0).toFixed(2);
-    monthlyReports.push(new MonthlyReport(monthNames[month], totalMonthlyAmountSum));
+    monthlyReports.push(new MonthlyReport(monthNames[month], totalMonthlyAmountSum, reasonPercentages));
 }
 
-console.log(monthlyReports);
+console.log(JSON.stringify(monthlyReports, null, 2));

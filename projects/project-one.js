@@ -34,11 +34,8 @@ let monthlyTransactionAmountSums = []
 
 for (let i = 0; i < 12; i++) {
     let monthlyTransactions = transactions.filter( transaction => transaction.date.getMonth() == i );
-
-    console.log(monthlyTransactions);
+    let totalMonthlyAmountSum = monthlyTransactions.reduce((accumulator, transaction) => accumulator + transaction.amount, 0).toFixed(2);
+    monthlyTransactionAmountSums.push(totalMonthlyAmountSum);
 }
 
-let totalAmountSum = transactions.reduce((accumulator, transaction) => accumulator + transaction.amount, 0).toFixed(2);
-
-// console.log(transactions);
-console.log(totalAmountSum);
+console.log(monthlyTransactionAmountSums);

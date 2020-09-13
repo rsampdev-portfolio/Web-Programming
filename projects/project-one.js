@@ -30,7 +30,15 @@ for (let i = 0; i < 365; i++) {
     transactions.push(transactionBuilder());
 }
 
+let monthlyTransactionAmountSums = []
+
+for (let i = 0; i < 12; i++) {
+    let monthlyTransactions = transactions.filter( transaction => transaction.date.getMonth() == i );
+
+    console.log(monthlyTransactions);
+}
+
 let totalAmountSum = transactions.reduce((accumulator, transaction) => accumulator + transaction.amount, 0).toFixed(2);
 
-console.log(transactions);
+// console.log(transactions);
 console.log(totalAmountSum);

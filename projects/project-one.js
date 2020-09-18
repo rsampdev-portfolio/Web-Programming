@@ -1,26 +1,3 @@
-class Transaction {
-    constructor(date, amount, reason) {
-        this.date = date;
-        this.amount = amount;
-        this.reason = reason;
-    }
-}
-
-class MonthlyReport {
-    constructor(month, transactionAmountSum, transactionReasonPercentages) {
-        this.month = month;
-        this.transactionAmountSum = transactionAmountSum;
-        this.transactionReasonPercentages = transactionReasonPercentages;
-    }
-}
-
-class Reason {
-    constructor(reason, percentage) {
-        this.reason = reason;
-        this.percentage = percentage;
-    }
-}
-
 let rawTransactionsData = [
     {
         "date": "2020-01-01T05:00:00.000Z",
@@ -1849,52 +1826,83 @@ let rawTransactionsData = [
     }
 ];
 
-function calculateMonthlyReportReasonPercentages(monthlyTransactions) {
-    let length = monthlyTransactions.length;
-    let reasonCounts = new Map();
-    let reasonPercentages = [];
-
-    for (let i = 0; i < length; i++) {
-        let reason = monthlyTransactions[i].reason;
-
-        if (reasonCounts.has(reason)) {
-            reasonCounts.set(reason, reasonCounts.get(reason) + 1);
-        } else {
-            reasonCounts.set(reason, 1);
-        }
+class Transaction {
+    constructor(date, amount, reason) {
+        this.date = date;
+        this.amount = amount;
+        this.reason = reason;
     }
-
-    reasonCounts.forEach((count, reason) => {
-        reasonPercentages.push(new Reason(reason, (count / length).toFixed(2)));
-    });
-
-    return reasonPercentages;
+}
+class ReasonPercentage {
+    constructor(reason, percentage) {
+        this.reason = reason;
+        this.percentage = percentage;
+    }
 }
 
-function buildMonthlyTransactionReport(rawTransactionsData) {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
+class MonthlyReport {
+    constructor(month, transactionAmountSum, transactionReasonPercentages) {
+        this.month = month;
+        this.transactionAmountSum = transactionAmountSum;
+        this.transactionReasonPercentages = transactionReasonPercentages;
+    }
+}
+
+function createReasonCache(originalAmount) {
+    let reasonCache = new Map();
+    
+    return {
+        cache: reason => {
+            if (reasonCache.has(reason)) {
+                reasonCache.set(reason, reasonCache.get(reason) + 1);
+            } else {
+                reasonCache.set(reason, 1);
+            }
+        },
+        reduce: () => {
+            let values = [];
+
+            reasonCache.forEach((count, reason) => {
+                values.push(new ReasonPercentage(reason, (count / originalAmount).toFixed(2)));
+            });
+
+            return values;
+        }
+    }
+}
+
+function calculateReasonPercentages(monthlyTransactions) {
+    let cache = createReasonCache(monthlyTransactions.length);
+
+    for (let i = 0; i < monthlyTransactions.length; i++) {
+        cache.cache(monthlyTransactions[i].reason);
+    }
+
+    return cache.reduce();
+}
+
+function parseOutMonthlyTransactionsReport(rawTransactionsData) {
+    const months = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
 
-    const transactions = rawTransactionsData.map(function (transaction) {
+    const transactions = rawTransactionsData.map(transaction => {
         return new Transaction(new Date(transaction.date), transaction.amount, transaction.reason);
     });
 
     let monthlyReports = [];
 
-    for (let month = 0; month < 12; month++) {
+    for (let month = 0; month < months.length; month++) {
         let monthlyTransactions = transactions.filter(transaction => transaction.date.getMonth() == month);
-        let reasonPercentages = calculateMonthlyReportReasonPercentages(monthlyTransactions);
-
-        console.log(reasonPercentages);
-
-        // monthlyTransactions.reduce((amountSum, transaction) => amountSum + transaction.amount, 0).toFixed(2);
-        // monthlyReports.push(new MonthlyReport(monthNames[month], totalMonthlyAmountSum, reasonPercentages));
+        let reasonPercentages = calculateReasonPercentages(monthlyTransactions);
+        let monthlyAmmountSum = monthlyTransactions.reduce((sum, transaction) => sum + transaction.amount, 0).toFixed(2);
+        monthlyReports.push(new MonthlyReport(months[month], monthlyAmmountSum, reasonPercentages));
     }
 
     return { "months": monthlyReports };
 }
 
-let report = buildMonthlyTransactionReport(rawTransactionsData);
+let report = parseOutMonthlyTransactionsReport(rawTransactionsData);
+let jsonReport = JSON.stringify(report.months, null, 2);
 
-console.log(JSON.stringify(report.months, null, 2));
+console.log(jsonReport);

@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "Rodney S. Sampson II",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
 }

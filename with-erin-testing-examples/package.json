@@ -5,7 +5,7 @@
   "jest": {
     "verbose": true,
     "testEnvironment": "jest-environment-node",
-    "transfrom": {}
+    "transform": {}
   },
   "description": "Morehouse College NPM, Modules, Testing lab",
   "main": "index.js",

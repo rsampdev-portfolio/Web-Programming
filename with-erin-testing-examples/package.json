@@ -10,6 +10,7 @@
   "author": "Rodney S. Sampson II",
   "license": "ISC",
   "dependencies": {
-    "http-server": "^0.12.3"
+    "http-server": "^0.12.3",
+    "jest": "^26.4.2"
   }
 }

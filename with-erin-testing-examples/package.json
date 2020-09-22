@@ -1,0 +1,12 @@
+{
+  "name": "with-erin-testing-examples",
+  "version": "1.0.0",
+  "description": "Morehouse College NPM, Modules, Testing lab",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rodney S. Sampson II",
+  "license": "ISC"
+}

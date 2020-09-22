@@ -1,10 +1,16 @@
 {
   "name": "with-erin-testing-examples",
   "version": "1.0.0",
+  "type": "module",
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "jest-environment-node",
+    "transfrom": {}
+  },
   "description": "Morehouse College NPM, Modules, Testing lab",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "Rodney S. Sampson II",

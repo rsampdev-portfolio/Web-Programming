@@ -1,6 +1,3 @@
-let rawTransactionsData = [
-];
-
 class Transaction {
     constructor(date, amount, reason) {
         this.date = date;
@@ -77,7 +74,14 @@ function parseOutMonthlyTransactionsReport(rawTransactionsData) {
     return { "months": monthlyReports };
 }
 
-let report = parseOutMonthlyTransactionsReport(rawTransactionsData);
-let jsonReport = JSON.stringify(report.months, null, 2);
+function buildTransactionReportTable() {
+    let rawTransactionsData = [
+    ];
+    
+    let report = parseOutMonthlyTransactionsReport(rawTransactionsData);
+    let jsonReport = JSON.stringify(report.months, null, 2);
 
-console.log(jsonReport);
+    console.log(jsonReport);
+
+    console.log("SAY SOMETHING!!!");
+}

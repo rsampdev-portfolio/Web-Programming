@@ -10,12 +10,18 @@
     </head>
     
     <body>
-        <h1>Header</h1>
+        <div id="content-container">
+            <h1>Monthly Transaction Report Builder</h1>
 
-        <p>Paragraph</p>
-
-        <button onclick="buildTransactionReportTable()">Build Transaction Report</button>
-
-        <div id="monthly-reports-container"></div>
+            <p>There is an array of sample account transactions and their reasons stored in a jsonbin.</p>
+    
+            <p>This program compiles a monthly report from those transactions.</p>
+    
+            <p>This program also displays the percentages of where the total money was spent.</p>
+    
+            <button onclick="buildTransactionReportTable()">Build Transaction Report</button>
+    
+            <div id="monthly-reports-container"></div>
+        </div>
     </body>
 </html>

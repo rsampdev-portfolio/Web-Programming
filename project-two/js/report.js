@@ -96,12 +96,14 @@ function buildMonthlyReportTableDiv(monthlyReport) {
     let monthlyTransactionSum = monthlyReport.transactionAmountSum;
     let transactionReasonPercentages = monthlyReport.transactionReasonPercentages;
 
-    monthHeader.innerText = `${month} | Monthly Transaction Sum: $${monthlyTransactionSum}`;
+    monthHeader.innerText = `${month} - $${monthlyTransactionSum}`;
 
     var thead = document.createElement("thead");
     var tbody = document.createElement("tbody");
     var headerRow = document.createElement("tr");
     var percentageRow = document.createElement("tr");
+
+    transactionReasonPercentages.sort((a, b) => b.percentage - a.percentage);
 
     transactionReasonPercentages.forEach(reason => {
         const reasonName = document.createElement("p");
@@ -112,10 +114,13 @@ function buildMonthlyReportTableDiv(monthlyReport) {
     });
 
     transactionReasonPercentages.forEach(reason => {
+        const reasonPercentageOfSum = document.createElement("p");
         const reasonPercentage = document.createElement("p");
         reasonPercentage.innerText = (`${reason.percentage}%`);
+        reasonPercentageOfSum.innerText = (`$${(monthlyTransactionSum * reason.percentage).toFixed(2)}`);
         var td = document.createElement("td");
         td.appendChild(reasonPercentage);
+        td.appendChild(reasonPercentageOfSum);
         percentageRow.appendChild(td);
         tbody.appendChild(percentageRow);
     });

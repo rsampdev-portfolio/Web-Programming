@@ -74,14 +74,21 @@ function parseOutMonthlyTransactionsReport(rawTransactionsData) {
     return { "months": monthlyReports };
 }
 
-function buildTransactionReportTable() {
-    let rawTransactionsData = [
-    ];
-    
-    let report = parseOutMonthlyTransactionsReport(rawTransactionsData);
-    let jsonReport = JSON.stringify(report.months, null, 2);
+async function buildTransactionReportTable() {
+    let response = await fetch("https://api.jsonbin.io/b/5f7e443965b18913fc5c5457/6", {
+        headers: {
+            "Content-Type": "application/json",
+            "secret-key": "$2b$10$EtZCBPnTjkcf2RsD4IpPe../wa5udw2LDI0zRzlLHn9Sl/yaEtrty"
+        }
+    });
 
-    console.log(jsonReport);
+    response.json().then(json => {
 
-    console.log("SAY SOMETHING!!!");
+        let rawTransactionsData = json["rawTransactionsData"];
+        let report = parseOutMonthlyTransactionsReport(rawTransactionsData);
+        let jsonReport = JSON.stringify(report.months, null, 2);
+
+        console.log(jsonReport);
+
+    }).catch(err => console.error(err));
 }

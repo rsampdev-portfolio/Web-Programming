@@ -6,10 +6,14 @@ body {
 
 #content-container {
     margin: auto;
-    padding: 20px;
     border-radius: 25px;
     border: 5px solid black;
     background-color: lightblue;
+}
+
+#buttons-container {
+    margin: auto;
+    text-align: center;
 }
 
 @media only screen and (min-width: 800px) {
@@ -20,6 +24,12 @@ body {
 
     #content-container {
         width: 70%;
+        padding: 20px;
+    }
+
+    #buttons-container {
+        padding: 20px;
+        display: inline;
     }
 
     table {
@@ -35,6 +45,12 @@ body {
 
     #content-container {
         width: 90%;
+        padding: 10px;
+    }
+
+    #buttons-container {
+        padding: 10px;
+        display: block;
     }
 
     table {

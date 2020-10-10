@@ -5,6 +5,8 @@
         <meta charset="UTF-8">
         <meta name="author" content="Rodney S. Sampson II">
 
+        <title>Monthly Transaction Report Builder</title>
+
         <script src="./js/report.js"></script>
         <link rel="stylesheet" href="./css/app.css">
     </head>
@@ -18,8 +20,12 @@
             <p>This program compiles a monthly report from those transactions.</p>
     
             <p>This program also displays the percentages of where the total money was spent.</p>
-    
-            <button onclick="buildTransactionReportTable()">Build Transaction Report</button>
+
+            <div id="buttons-container">
+                <button onclick="buildTransactionReportTable()">Build Transaction Report</button>
+
+                <button onclick="resetMonthlyReportsContainer()">Reset Monthly Report</button>
+            </div>
     
             <div id="monthly-reports-container"></div>
         </div>

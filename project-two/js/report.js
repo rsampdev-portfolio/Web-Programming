@@ -103,7 +103,7 @@ function buildMonthlyReportTableDiv(monthlyReport) {
     var headerRow = document.createElement("tr");
     var percentageRow = document.createElement("tr");
 
-    transactionReasonPercentages.sort((a, b) => b.percentage - a.percentage);
+    transactionReasonPercentages.sort((a, b) => a.percentage - b.percentage);
 
     transactionReasonPercentages.forEach(reason => {
         const reasonName = document.createElement("p");
@@ -135,7 +135,16 @@ function buildMonthlyReportTableDiv(monthlyReport) {
     document.getElementById("monthly-reports-container").appendChild(container);
 }
 
+let reportCache = null;
+
 async function buildTransactionReportTable() {
-    let report = await retrieveTransactionReportData();
-    report.months.forEach(buildMonthlyReportTableDiv);
+    if (reportCache == null) {
+        reportCache = await retrieveTransactionReportData();
+    }
+
+    reportCache.months.forEach(buildMonthlyReportTableDiv);
+}
+
+function resetMonthlyReportsContainer() {
+    document.getElementById("monthly-reports-container").innerHTML = "";
 }

@@ -34,32 +34,32 @@ a {
 
 /* flex */
 
+.flex-container {
+    display: flex;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
 .flex-center {
     justify-content: center;
 }
 
-.flex-container {
-    /* TODO */
-}
-
-.flex-start {
-    /* TODO */
-}
-
 .flex-end {
-    /* TODO */
+    justify-content: flex-end;
 }
 
 .flex-column {
-    /* TODO */
+    flex-direction: column;
 }
 
 .flex-space-between {
-    /* TODO */
+    justify-content: space-between;
 }
 
 .flex-space-around {
-    /* TODO */
+    justify-content: space-around;
 }
 
 /*Shared Styling */

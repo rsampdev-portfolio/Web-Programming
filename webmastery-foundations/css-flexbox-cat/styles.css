@@ -25,11 +25,11 @@ footer {
 }
 
 a {
-    /* TODO */
+    text-decoration: none;
 }
 
 .menu li {
-    /* TODO */
+    list-style-type: none; 
 }
 
 /* flex */
@@ -72,11 +72,11 @@ a {
 }
 
 .silver-background {
-    /* TODO */
+    background: silver;
 }
 
 .white-text, a {
-    /* TODO */
+    color: white;
 }
 
 .signup-button {

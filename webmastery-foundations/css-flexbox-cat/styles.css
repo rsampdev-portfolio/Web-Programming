@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+body {
+    height: 100%; 
+    margin: 0px; 
+    padding: 0px;
+  }
+
 h2 {
     text-align: center;
 }
@@ -25,6 +31,8 @@ footer {
 }
 
 a {
+    margin: 10px;
+    padding: 12px 4px;
     text-decoration: none;
 }
 
@@ -68,7 +76,7 @@ a {
 }
 
 .blue-background {
-    /* TODO */
+    background-color: #6798E4;
 }
 
 .silver-background {
@@ -80,9 +88,13 @@ a {
 }
 
 .signup-button {
+    margin: 10px;
     border: none;
     color: black;
+    padding: 12px 15px;
+    border-radius: 10px;
     text-decoration: none;
+    background-color: #6798E4;
 }
 
 /* Responsive Website */

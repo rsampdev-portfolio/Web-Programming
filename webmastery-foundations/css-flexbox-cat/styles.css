@@ -1,0 +1,118 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    margin: 0pt 10pt;
+    padding: 10pt 10pt;
+}
+
+img {
+    padding: 10pt;
+    align-self: center;
+}
+
+footer {
+    padding: 10pt;
+    width: 100%;
+    margin-bottom: -50px;
+}
+
+a {
+    /* TODO */
+}
+
+.menu li {
+    /* TODO */
+}
+
+/* flex */
+
+.flex-center {
+    justify-content: center;
+}
+
+.flex-container {
+    /* TODO */
+}
+
+.flex-start {
+    /* TODO */
+}
+
+.flex-end {
+    /* TODO */
+}
+
+.flex-column {
+    /* TODO */
+}
+
+.flex-space-between {
+    /* TODO */
+}
+
+.flex-space-around {
+    /* TODO */
+}
+
+/*Shared Styling */
+.full-height {
+    height: 100%;
+}
+
+.blue-background {
+    /* TODO */
+}
+
+.silver-background {
+    /* TODO */
+}
+
+.white-text, a {
+    /* TODO */
+}
+
+.signup-button {
+    /* TODO */
+}
+
+/* Responsive Website */
+
+.menu {
+    /* TODO */
+}
+
+.sidebar {
+    /* TODO */
+}
+
+.sidebar-left {
+    /* TODO */
+}
+
+.article-content {
+    /* TODO */
+}
+
+.sidebar-right {
+    /* TODO */
+}
+
+.flex1 {
+    /* TODO */
+}
+
+.flex6 {
+    /* TODO */
+}
+
+@media all and (max-width: 991px) {
+    /* TODO */
+}

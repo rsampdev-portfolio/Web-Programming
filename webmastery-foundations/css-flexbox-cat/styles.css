@@ -5,8 +5,8 @@
 }
 
 body {
-    height: 100%; 
-    margin: 0px; 
+    margin: 0px;
+    height: 100%;
     padding: 0px;
 }
 
@@ -40,7 +40,7 @@ a {
     list-style-type: none; 
 }
 
-/* flex */
+/* Flexbox */
 
 .flex-container {
     display: flex;
@@ -70,7 +70,8 @@ a {
     justify-content: space-around;
 }
 
-/*Shared Styling */
+/* Shared Styling */
+
 .full-height {
     height: 100%;
 }
@@ -104,6 +105,8 @@ a {
 }
 
 .sidebar {
+    flex: 0 0 300px;
+    min-width: 300px;
     align-content: center;
 }
 

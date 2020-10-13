@@ -134,5 +134,17 @@ a {
 }
 
 @media all and (max-width: 991px) {
-    /* TODO */
+    .flex-container {
+        flex-direction: column;
+    }
+    
+    .menu {
+        order: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        order: 1;
+    }
 }

@@ -80,37 +80,42 @@ a {
 }
 
 .signup-button {
-    /* TODO */
+    border: none;
+    color: black;
+    text-decoration: none;
 }
 
 /* Responsive Website */
 
 .menu {
-    /* TODO */
+    order: 0;
 }
 
 .sidebar {
-    /* TODO */
+    align-content: center;
 }
 
 .sidebar-left {
-    /* TODO */
+    order: 0;
+    flex-grow: 1;
 }
 
 .article-content {
-    /* TODO */
+    order: 1;
+    flex-grow: 3;
 }
 
 .sidebar-right {
-    /* TODO */
+    order: 2;
+    flex-grow: 1;
 }
 
 .flex1 {
-    /* TODO */
+    order: 1;
 }
 
 .flex6 {
-    /* TODO */
+    order: 6;
 }
 
 @media all and (max-width: 991px) {

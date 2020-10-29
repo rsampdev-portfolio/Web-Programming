@@ -3,68 +3,59 @@ import ColorSlider from './ColorSlider'
 import ColorOutput from './ColorOutput'
 import styles from './ColorBrowser.module.css'
 
-class ColorBrowser extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            red: Math.floor(Math.random() * 256),
-            green: Math.floor(Math.random() * 256),
-            blue: Math.floor(Math.random() * 256)
-        }
-    }
-    updateColor(e) {
-        this.setState({
-           [e.target.name]: Number(e.target.value)
-        })
-    }
-    getRandomColor() {
-        this.setState({
-            red: Math.floor(Math.random() * 256),
-            green: Math.floor(Math.random() * 256),
-            blue: Math.floor(Math.random() * 256)
-        })
-    }
-    render() {
-        return (
-            <section className={styles["color-browser"]}>
-                <h1>Welcome to the Color Browser</h1>
-                <div className={styles.sliders}>
-                    <ColorSlider
-                        name="red"
-                        label="Red"
-                        min={0}
-                        max={255}
-                        value={this.state.red}
-                        onChange={this.updateColor.bind(this)}
-                    />
-                    <ColorSlider
-                        name="green"
-                        label="Green"
-                        min={0}
-                        max={255}
-                        value={this.state.green}
-                        onChange={this.updateColor.bind(this)}
-                    />
-                    <ColorSlider
-                        name="blue"
-                        label="Blue"
-                        min={0}
-                        max={255}
-                        value={this.state.blue}
-                        onChange={this.updateColor.bind(this)}
-                    />
-                </div>
+function ColorBrowser() {
+    let [red, setRed] = React.useState(Math.floor(Math.random() * 256));
+    let [green, setGreen] = React.useState(Math.floor(Math.random() * 256));
+    let [blue, setBlue] = React.useState(Math.floor(Math.random() * 256));
 
-                <ColorOutput
-                    red={this.state.red}
-                    green={this.state.green}
-                    blue={this.state.blue}
-                />
-                <br/>
-                <button onClick={this.getRandomColor.bind(this)}>Random Color</button>
-            </section>
-        )
+    function getRandomColor() {
+        setRed(Math.floor(Math.random() * 256));
+        setGreen(Math.floor(Math.random() * 256));
+        setBlue(Math.floor(Math.random() * 256));
     }
+
+    return (
+        <section className={styles["color-browser"]}>
+            <h1>Welcome to the Color Browser</h1>
+            <div className={styles.sliders}>
+                <ColorSlider
+                    name="red"
+                    label="Red"
+                    min={0}
+                    max={255} 
+                    value={red}
+                    onChange={e => setRed(Number(e.target.value))}
+                />
+
+                <ColorSlider
+                    name="green"
+                    label="Green"
+                    min={0}
+                    max={255}
+                    value={green}
+                    onChange={e => setGreen(Number(e.target.value))}
+                />
+
+                <ColorSlider
+                    name="blue"
+                    label="Blue"
+                    min={0}
+                    max={255}
+                    value={blue}
+                    onChange={e => setBlue(Number(e.target.value))}
+                    />
+            </div>
+
+            <ColorOutput
+                red={red}
+                green={green}
+                blue={blue}
+            />
+            
+            <br/>
+            <button onClick={getRandomColor}>Random Color</button>
+        </section>
+    )
 }
 
 export default ColorBrowser

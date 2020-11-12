@@ -54,7 +54,7 @@ function calculateReasonPercentages(monthlyTransactions) {
 }
 
 async function retrieveTransactionReportData() {
-    let response = await fetch("https://api.jsonbin.io/b/5f7e443965b18913fc5c5457/6", {
+    let response = await fetch("https://api.jsonbin.io/b/5fad6d6443fc1e2e1b414b84", {
         headers: {
             "Content-Type": "application/json",
             "secret-key": "$2b$10$EtZCBPnTjkcf2RsD4IpPe../wa5udw2LDI0zRzlLHn9Sl/yaEtrty"
@@ -73,6 +73,10 @@ export const parseOutMonthlyTransactionsReport = rawTransactionsData => {
     const months = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
+
+    if (rawTransactionsData === null || rawTransactionsData === undefined) {
+        return null;
+    }
 
     const transactions = rawTransactionsData.map(transaction => {
         return new Transaction(new Date(transaction.date), transaction.amount, transaction.reason);

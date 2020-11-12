@@ -1,11 +1,8 @@
-import React, {
-  Component
-} from "react";
+import React from "react";
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
   Link
 } from "react-router-dom";
 
@@ -18,120 +15,107 @@ import {
 
 import MonthlyReportContainer from "./components/monthly-report-container/monthly-report-container.js";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+function App() {
+  let [data, updateData] = React.useState(null);
 
-    this.state = {
-      data: null,
-    };
+  getReportCache().then(result => {
+    updateData(parseOutMonthlyTransactionsReport(result).months)
+  }).catch(err => console.log(err));
+
+  function linker(url, linkName) {
+    return <b><Link to={`/${url}`}>{`${linkName}`}</Link></b>;
   }
 
-  async componentDidMount() {
-    if (this.state.data == null) {
-      let data = await getReportCache();
-      let months = parseOutMonthlyTransactionsReport(data).months;
+  // function buildNavLinks(urls, linkTitles, topRowSize) {
+  //   let bottomRow = [];
+  //   let topRow = [];
+  //   let i = 0;
 
-      this.setState({
-        data: months
-      });
+  //   for (; i < topRowSize; i++) {
+  //     topRow.push(React.createElement("li", null, linker(`/${urls[i]}`, linkTitles[i])));
+  //   }
+
+  //   for (; i < 13; i++) {
+  //     bottomRow.push(React.createElement("li", null, linker(`/${urls[i]}`, linkTitles[i])));
+  //   }
+
+  //   return React.createElement("div", null, [topRow, bottomRow]);
+  // }
+
+  function allMonths(data, urls) {
+    let children = [];
+
+    for (let i = 0; i < 12; i++) {
+      children.push(<MonthlyReportContainer key={`MonthlyReportContainer-${i}`} month={data != null ? data[i] : null} />);
     }
+
+    return React.createElement("div", null, children);;
   }
 
-  linker(url, text) {
-    return <b><Link to={`/${url}`}>{`${text}`}</Link></b>;
+  function allRoutes(data, urls) {
+    let children = [];
+
+    for (let i = 0; i < 13; i++) {
+      if (i === 12) {
+        children.push(allMonths(data));
+      }
+
+      children.push(
+        React.createElement("Route", { "path": `/${urls[i]}` },
+          <MonthlyReportContainer month={data != null ? data[i] : null} />
+        ));
+    }
+
+    return children;
   }
 
-  render() {
-    return (
-      <>
-        <div id="Content-Container">
-          <Router>
-            <nav>
-              <ul>
-                <li>{this.linker("january", "January")}</li>
-                <li>{this.linker("february", "February")}</li>
-                <li>{this.linker("march", "March")}</li>
-                <li>{this.linker("april", "April")}</li>
-                <li>{this.linker("may", "May")}</li>
-                <li>{this.linker("june", "June")}</li>
-                <li>{this.linker("july", "July")}</li>
-              </ul>
-              <ul>
-                <li>{this.linker("august", "August")}</li>
-                <li>{this.linker("september", "September")}</li>
-                <li>{this.linker("october", "October")}</li>
-                <li>{this.linker("november", "November")}</li>
-                <li>{this.linker("december", "December")}</li>
-                <li>{this.linker("", "All Months")}</li>
-              </ul>
-            </nav>
+  const urls = ["january", "february", "march", "april", "may", "june",
+    "july", "august", "september", "october", "november", "december", ""
+  ];
 
-            <div id="Content-Container">
-              <h2>Monthly Transaction Report Viewer</h2>
+  // const linkTitles = ["January", "February", "March", "April", "May", "June",
+  //   "July", "August", "September", "October", "November", "December", "All Months"
+  // ];
 
-              <p>There is an array of sample account transactions and their reasons stored in a JSONbin.</p>
+  return (
+    <>
+      <div id="Content-Container">
+        <Router>
+          <nav>
+            <ul>
+              <li>{linker("january", "January")}</li>
+              <li>{linker("february", "February")}</li>
+              <li>{linker("march", "March")}</li>
+              <li>{linker("april", "April")}</li>
+              <li>{linker("may", "May")}</li>
+              <li>{linker("june", "June")}</li>
+              <li>{linker("july", "July")}</li>
+            </ul>
+            <ul>
+              <li>{linker("august", "August")}</li>
+              <li>{linker("september", "September")}</li>
+              <li>{linker("october", "October")}</li>
+              <li>{linker("november", "November")}</li>
+              <li>{linker("december", "December")}</li>
+              <li>{linker("", "All Months")}</li>
+            </ul>
+          </nav>
 
-              <p>This program compiles the yearly report and each monthly report from those transactions.</p>
+          <div id="Content-Container">
+            <h2>Monthly Transaction Report Viewer</h2>
 
-              <Switch>
-                <Route exact path="/">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[0] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[1] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[2] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[3] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[4] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[5] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[6] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[7] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[8] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[9] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[10] : null} />
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[11] : null} />
-                </Route>
-                <Route exact path="/january">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[0] : null} />
-                </Route>
-                <Route exact path="/february">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[1] : null} />
-                </Route>
-                <Route exact path="/march">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[2] : null} />
-                </Route>
-                <Route exact path="/april">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[3] : null} />
-                </Route>
-                <Route exact path="/may">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[4] : null} />
-                </Route>
-                <Route exact path="/june">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[5] : null} />
-                </Route>
-                <Route exact path="/july">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[6] : null} />
-                </Route>
-                <Route exact path="/august">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[7] : null} />
-                </Route>
-                <Route exact path="/september">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[8] : null} />
-                </Route>
-                <Route exact path="/october">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[9] : null} />
-                </Route>
-                <Route exact path="/november">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[10] : null} />
-                </Route>
-                <Route exact path="/december">
-                  <MonthlyReportContainer month={this.state.data != null ? this.state.data[11] : null} />
-                </Route>
-              </Switch>
-            </div>
-          </Router>
-        </div>
-      </>
-    );
-  }
+            <p>There is an array of sample account transactions and their reasons stored in a JSONbin.</p>
+
+            <p>This program compiles the yearly report and each monthly report from those transactions.</p>
+
+            <Switch>
+              {allRoutes(data, urls)}
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    </>
+  );
 }
 
 export default App;

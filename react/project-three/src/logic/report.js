@@ -53,54 +53,6 @@ function calculateReasonPercentages(monthlyTransactions) {
     return cache.reduce();
 }
 
-// function buildMonthlyReportTableDiv(monthlyReport) {
-//     const container = document.createElement("div");
-//     const monthHeader = document.createElement("h3");
-//     const table = document.createElement("table");
-
-//     let month = monthlyReport.month;
-//     let monthlyTransactionSum = monthlyReport.transactionAmountSum;
-//     let transactionReasonPercentages = monthlyReport.transactionReasonPercentages;
-
-//     monthHeader.innerText = `${month} - $${monthlyTransactionSum}`;
-
-//     var thead = document.createElement("thead");
-//     var tbody = document.createElement("tbody");
-//     var headerRow = document.createElement("tr");
-//     var percentageRow = document.createElement("tr");
-
-//     transactionReasonPercentages.sort((a, b) => a.percentage - b.percentage);
-
-//     transactionReasonPercentages.forEach(reason => {
-//         const reasonName = document.createElement("p");
-//         var th = document.createElement("th");
-//         reasonName.innerText = reason.reason;
-//         th.appendChild(reasonName);
-//         headerRow.appendChild(th);
-//     });
-
-//     transactionReasonPercentages.forEach(reason => {
-//         const reasonPercentageOfSum = document.createElement("p");
-//         const reasonPercentage = document.createElement("p");
-//         reasonPercentage.innerText = (`${reason.percentage}%`);
-//         reasonPercentageOfSum.innerText = (`$${(monthlyTransactionSum * reason.percentage).toFixed(2)}`);
-//         var td = document.createElement("td");
-//         td.appendChild(reasonPercentage);
-//         td.appendChild(reasonPercentageOfSum);
-//         percentageRow.appendChild(td);
-//         tbody.appendChild(percentageRow);
-//     });
-
-//     thead.appendChild(headerRow);
-//     table.appendChild(thead);
-//     table.appendChild(tbody);
-
-//     container.appendChild(monthHeader);
-//     container.appendChild(table);
-
-//     return container;
-// }
-
 async function retrieveTransactionReportData() {
     let response = await fetch("https://api.jsonbin.io/b/5f7e443965b18913fc5c5457/6", {
         headers: {

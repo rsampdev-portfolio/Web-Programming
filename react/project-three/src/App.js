@@ -39,9 +39,7 @@ class App extends Component {
   }
 
   linker(url, text) {
-    return (
-      <Link to={`/${url}`}><b><a>{`${text}`}</a></b></Link>
-    );
+    return <b><Link to={`/${url}`}>{`${text}`}</Link></b>;
   }
 
   render() {
@@ -66,14 +64,14 @@ class App extends Component {
                   <li>{this.linker("october", "October")}</li>
                   <li>{this.linker("november", "November")}</li>
                   <li>{this.linker("december", "December")}</li>
-                  <li>{this.linker("all", "All Months")}</li>
+                  <li>{this.linker("", "All Months")}</li>
                 </ul>
               </nav>
             </span>
 
             <div id="Content-Container">
               <Switch>
-                <Route exact path={["/", "/all"]}>
+                <Route exact path="/">
                   <MonthlyReportContainer month={this.state.data != null ? this.state.data[0] : null} />
                   <MonthlyReportContainer month={this.state.data != null ? this.state.data[1] : null} />
                   <MonthlyReportContainer month={this.state.data != null ? this.state.data[2] : null} />

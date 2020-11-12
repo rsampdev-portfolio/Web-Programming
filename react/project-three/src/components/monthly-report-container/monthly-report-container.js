@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class MonthlyReportContainer extends Component {
+    helper(month, number) {
+        return `${month.transactionReasonPercentages[number].reason} - ${month.transactionReasonPercentages[number].percentage}%`
+        + ` - $${(month.transactionAmountSum * month.transactionReasonPercentages[number].percentage).toFixed(2)}`
+    }
     render() {
         let month = this.props.month;
 
@@ -12,37 +16,27 @@ class MonthlyReportContainer extends Component {
         
         return (
             <div>
+                <h2>Monthly Transaction Report Viewer</h2>
+
+                <p>There is an array of sample account transactions and their reasons stored in a JSONbin.</p>
+
+                <p>This program compiles the yearly report and each monthly report from those transactions.</p>
+
                 <h3>{month.month}</h3>
 
                 <h4>{`Total Monthly Transactions - $${month.transactionAmountSum}`}</h4>
 
                 <h4>{"Transaction Reason Percentages:"}</h4>
 
-                <p>
-                    {`${month.transactionReasonPercentages[0].reason} - ${month.transactionReasonPercentages[0].percentage}%`}
-                    {` - $${(month.transactionAmountSum * month.transactionReasonPercentages[0].percentage).toFixed(2)}`}
-                </p>
+                <p>{this.helper(month, 0)}</p>
 
-                <p>
-                    {`${month.transactionReasonPercentages[1].reason} - ${month.transactionReasonPercentages[1].percentage}%`}
-                    {` - $${(month.transactionAmountSum * month.transactionReasonPercentages[1].percentage).toFixed(2)}`}
-                </p>
+                <p>{this.helper(month, 1)}</p>
 
-                <p>
-                    {`${month.transactionReasonPercentages[2].reason} - ${month.transactionReasonPercentages[2].percentage}%`}
-                    {` - $${(month.transactionAmountSum * month.transactionReasonPercentages[2].percentage).toFixed(2)}`}
-                </p>
+                <p>{this.helper(month, 2)}</p>
 
-                <p>
-                    {`${month.transactionReasonPercentages[3].reason} - ${month.transactionReasonPercentages[3].percentage}%`}
-                    {` - $${(month.transactionAmountSum * month.transactionReasonPercentages[3].percentage).toFixed(2)}`}
-                </p>
+                <p>{this.helper(month, 3)}</p>
 
-                <p>
-                    {`${month.transactionReasonPercentages[4].reason} - ${month.transactionReasonPercentages[4].percentage}%`}
-                    {` - $${(month.transactionAmountSum * month.transactionReasonPercentages[4].percentage).toFixed(2)}`}
-                </p>
-
+                <p>{this.helper(month, 4)}</p>
             </div>
         );
     }

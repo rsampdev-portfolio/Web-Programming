@@ -16,6 +16,10 @@ import {
 import MonthlyReportContainer from "./components/monthly-report-container/monthly-report-container.js";
 
 function App() {
+  const urls = ["january", "february", "march", "april", "may", "june",
+    "july", "august", "september", "october", "november", "december", ""
+  ];
+
   let [data, updateData] = React.useState(null);
 
   getReportCache().then(result => {
@@ -25,22 +29,6 @@ function App() {
   function linker(url, linkName) {
     return <b><Link to={`/${url}`}>{`${linkName}`}</Link></b>;
   }
-
-  // function buildNavLinks(urls, linkTitles, topRowSize) {
-  //   let bottomRow = [];
-  //   let topRow = [];
-  //   let i = 0;
-
-  //   for (; i < topRowSize; i++) {
-  //     topRow.push(React.createElement("li", null, linker(`/${urls[i]}`, linkTitles[i])));
-  //   }
-
-  //   for (; i < 13; i++) {
-  //     bottomRow.push(React.createElement("li", null, linker(`/${urls[i]}`, linkTitles[i])));
-  //   }
-
-  //   return React.createElement("div", null, [topRow, bottomRow]);
-  // }
 
   function allMonths(data, urls) {
     let children = [];
@@ -68,14 +56,6 @@ function App() {
 
     return children;
   }
-
-  const urls = ["january", "february", "march", "april", "may", "june",
-    "july", "august", "september", "october", "november", "december", ""
-  ];
-
-  // const linkTitles = ["January", "February", "March", "April", "May", "June",
-  //   "July", "August", "September", "October", "November", "December", "All Months"
-  // ];
 
   return (
     <>

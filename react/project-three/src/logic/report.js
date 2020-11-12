@@ -54,7 +54,7 @@ function calculateReasonPercentages(monthlyTransactions) {
 }
 
 async function retrieveTransactionReportData() {
-    let response = await fetch("https://api.jsonbin.io/b/5fad72b6ea9b612e1c66e3f4", {
+    let response = await fetch("https://api.jsonbin.io/b/5fad7ffd0f2f494a27e0008f", {
         headers: {
             "Content-Type": "application/json",
             "secret-key": "$2b$10$8/MXs4r3ant9.Vtjh.INgerZ9FbIkuYH2T1VnEW/E0VVVy.WUY/5S"

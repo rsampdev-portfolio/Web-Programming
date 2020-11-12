@@ -23,7 +23,9 @@ function App() {
   let [data, updateData] = React.useState(null);
 
   getReportCache().then(result => {
-    updateData(parseOutMonthlyTransactionsReport(result).months)
+    if (data === null || data === undefined) {
+      updateData(parseOutMonthlyTransactionsReport(result).months);
+    }
   }).catch(err => console.log(err));
 
   function linker(url, linkName) {
@@ -37,7 +39,7 @@ function App() {
       children.push(<MonthlyReportContainer key={`MonthlyReportContainer-${i}`} month={data != null ? data[i] : null} />);
     }
 
-    return React.createElement("div", null, children);;
+    return React.createElement("div", null, children);
   }
 
   function allRoutes(data, urls) {

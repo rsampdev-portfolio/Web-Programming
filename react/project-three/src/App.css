@@ -3,7 +3,8 @@ body {
 }
 
 #Content-Container {
-  background-color: lightblue;
+  background-color: navy;
+  color: white;
 
   /* position: fixed;
   top: 50%;
@@ -11,7 +12,12 @@ body {
 
   transform: translate(-50%, -50%); */
 
+  border-radius: 25px;
+  padding: 20px;
+
+  
   width: 50%;
+  height: 100%;
 }
 
 .App-header {

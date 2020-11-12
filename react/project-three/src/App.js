@@ -47,29 +47,33 @@ class App extends Component {
       <>
         <div id="Content-Container">
           <Router>
-            <span>
-              <nav>
-                <ul>
-                  <li>{this.linker("january", "January")}</li>
-                  <li>{this.linker("february", "February")}</li>
-                  <li>{this.linker("march", "March")}</li>
-                  <li>{this.linker("april", "April")}</li>
-                  <li>{this.linker("may", "May")}</li>
-                  <li>{this.linker("june", "June")}</li>
-                  <li>{this.linker("july", "July")}</li>
-                </ul>
-                <ul>
-                  <li>{this.linker("august", "August")}</li>
-                  <li>{this.linker("september", "September")}</li>
-                  <li>{this.linker("october", "October")}</li>
-                  <li>{this.linker("november", "November")}</li>
-                  <li>{this.linker("december", "December")}</li>
-                  <li>{this.linker("", "All Months")}</li>
-                </ul>
-              </nav>
-            </span>
+            <nav>
+              <ul>
+                <li>{this.linker("january", "January")}</li>
+                <li>{this.linker("february", "February")}</li>
+                <li>{this.linker("march", "March")}</li>
+                <li>{this.linker("april", "April")}</li>
+                <li>{this.linker("may", "May")}</li>
+                <li>{this.linker("june", "June")}</li>
+                <li>{this.linker("july", "July")}</li>
+              </ul>
+              <ul>
+                <li>{this.linker("august", "August")}</li>
+                <li>{this.linker("september", "September")}</li>
+                <li>{this.linker("october", "October")}</li>
+                <li>{this.linker("november", "November")}</li>
+                <li>{this.linker("december", "December")}</li>
+                <li>{this.linker("", "All Months")}</li>
+              </ul>
+            </nav>
 
             <div id="Content-Container">
+              <h2>Monthly Transaction Report Viewer</h2>
+
+              <p>There is an array of sample account transactions and their reasons stored in a JSONbin.</p>
+
+              <p>This program compiles the yearly report and each monthly report from those transactions.</p>
+
               <Switch>
                 <Route exact path="/">
                   <MonthlyReportContainer month={this.state.data != null ? this.state.data[0] : null} />

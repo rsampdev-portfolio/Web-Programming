@@ -16,12 +16,6 @@ class MonthlyReportContainer extends Component {
         
         return (
             <div>
-                <h2>Monthly Transaction Report Viewer</h2>
-
-                <p>There is an array of sample account transactions and their reasons stored in a JSONbin.</p>
-
-                <p>This program compiles the yearly report and each monthly report from those transactions.</p>
-
                 <h3>{month.month}</h3>
 
                 <h4>{`Total Monthly Transactions - $${month.transactionAmountSum}`}</h4>
